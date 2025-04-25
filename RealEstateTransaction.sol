@@ -24,6 +24,11 @@ contract RealEstateTransaction {
         });
     }
 
+    // Function to check if a property exists
+    function propertyExists(uint256 _id) public view returns (bool) {
+        return properties[_id].owner != address(0);
+    }
+
     // Function to transfer ownership of a property
     function transferOwnership(uint256 _propertyId, address _newOwner) public payable {
         Property storage property = properties[_propertyId];
