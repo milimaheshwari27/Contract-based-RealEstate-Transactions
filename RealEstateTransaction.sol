@@ -29,6 +29,16 @@ contract RealEstateTransaction {
         return properties[_id].owner != address(0);
     }
 
+    // Function to update the price of a property (Only the owner can update)
+    function updatePropertyPrice(uint256 _propertyId, uint256 _newPrice) public {
+        Property storage property = properties[_propertyId];
+    
+        require(msg.sender == property.owner, "You are not the owner of this property");
+        require(_newPrice > 0, "Price must be greater than zero");
+        
+        property.price = _newPrice;
+    }
+
     // Function to transfer ownership of a property
     function transferOwnership(uint256 _propertyId, address _newOwner) public payable {
         Property storage property = properties[_propertyId];
