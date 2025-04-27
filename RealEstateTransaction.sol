@@ -54,6 +54,22 @@ contract RealEstateTransaction {
         emit PropertyTransferred(_propertyId, previousOwner, _newOwner);
     }
 
+    function getAllPropertyIds() public view returns (uint256[] memory) {
+        uint256[] memory ids = new uint256[](getPropertyCount());
+        uint256 index = 0;
+    
+         for (uint256 i = 1; i <= getPropertyCount(); i++) {
+            if (propertyExists(i)) {
+                ids[index] = i;
+                index++;
+            }
+        }
+        return ids;
+    }
+
+function getPropertyCount() public view returns (uint256) {
+    return propertyCount;
+}
     // Function to get property details
     function getPropertyDetails(uint256 _id) public view returns (string memory name, address owner, uint256 price) {
         Property storage property = properties[_id];
