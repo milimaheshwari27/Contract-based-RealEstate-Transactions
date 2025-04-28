@@ -67,9 +67,13 @@ contract RealEstateTransaction {
         return ids;
     }
 
-function getPropertyCount() public view returns (uint256) {
-    return propertyCount;
-}
+    function getPropertyCount() public view returns (uint256) {
+        return propertyCount;
+    }
+    function getPropertyPrice(uint256 _propertyId) public view returns (uint256) {
+        require(propertyExists(_propertyId), "Property does not exist");
+        return properties[_propertyId].price;
+    }
     // Function to get property details
     function getPropertyDetails(uint256 _id) public view returns (string memory name, address owner, uint256 price) {
         Property storage property = properties[_id];
